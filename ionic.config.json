@@ -1,0 +1,7 @@
+{
+  "name": "littlepostie",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
