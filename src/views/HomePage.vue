@@ -1,56 +1,116 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-    </ion-content>
-  </ion-page>
+    <ion-page color="danger">
+        <ion-content>
+            <div class="welcome-background">
+                <div class="rotating-background">
+                    <div
+                        v-for="(color, index) in colors"
+                        :key="index"
+                        :style="{ backgroundColor: color }"
+                        class="color-section"
+                    ></div>
+                </div>
+            </div>
+            <div class="welcome-container">
+                <img
+                    src="../assets/austin-logo-2@4x.png"
+                    alt="Austin"
+                    class="welcome-image"
+                />
+                <ion-button
+                    expand="full"
+                    shape="round"
+                    color="primary"
+                    @click="goToLibrary"
+                    >Go To Library</ion-button
+                >
+            </div>
+        </ion-content>
+    </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const colors = ["#FF0000", "#FFA500", "#00FF00", "#FFFF00", "#0000FF", "#800080"];
+
+const goToLibrary = () => {
+  router.push({ name: "Library" });
+};
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  
+.welcome-image {
+  width: 45vw;
+  height: auto;
+}
+
+.welcome-image img {
+  object-fit: cover;
+  z-index: -1;
+  transform: scale(6);
+  animation: rotate 10s linear infinite;
+}
+
+.welcome-background {
   position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.rotating-background {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: calc(100vw * 2);
+  height: calc(100vh * 2);
+  transform: translate(-50vw, -50vw); /* Center the grid */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  transform-origin: center;
+  animation: rotate 20s linear infinite;
+  z-index: -1;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
+.color-section {
+  width: 100%;
+  height: 100%;
 }
 
-#container a {
-  text-decoration: none;
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  gap: 2rem;
+  padding: 16px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
