@@ -21,9 +21,15 @@
                     expand="full"
                     shape="round"
                     color="primary"
+                    size="large"
                     @click="goToLibrary"
-                    >Go To Library</ion-button
                 >
+                    Let's Go!
+                    <ion-icon
+                        slot="end"
+                        :icon="playCircle"
+                    ></ion-icon>
+                </ion-button>
             </div>
         </ion-content>
     </ion-page>
@@ -31,6 +37,7 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { playCircle } from 'ionicons/icons';
 
 const router = useRouter();
 
@@ -43,7 +50,7 @@ const goToLibrary = () => {
 
 <style scoped>
 .welcome-image {
-  width: 45vw;
+  width: 75vw;
   height: auto;
 }
 

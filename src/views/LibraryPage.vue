@@ -3,6 +3,7 @@
         <ion-grid class="ion-grid">
             <ion-row>
                 <ion-col
+                    size="12"
                     size-sm="3"
                     class="video-card"
                     v-for="video in videos"
@@ -33,7 +34,7 @@ const videos = [
   { id: "pZw9veQ76fo", title: "5 Little Ducks" },
   { id: "TjmGTbNLj6Q", title: "10 Little Dinosaurs" },
   { id: "lm74Gv3tA78", title: "10 Little Aeroplanes" },
-  { id: "e_04ZrNroTo", title: "Wheels on the Bus" },
+  { id: "oLnd4G7dsHg", title: "Wheels on the Bus" },
   { id: "rHtq5GIIUV8", title: "5 Little Ghosts" },
   { id: "BpEAhgoitfE", title: "ABC Boo" },
   { id: "OekqqZj5kWw", title: "Chuggington Theme Song" },
@@ -42,9 +43,18 @@ const videos = [
   { id: "1UdI_eoDPKQ", title: "Paw Patrol Theme Song" },
   { id: "vC0u5Bi6hos", title: "Creature Report Theme Song" },
   { id: "kCeBJWEyVFM", title: "Octonauts: Above & Beyond - Opening Theme" },
-  { id: "kCeBJWEyVFM", title: "Octonauts: Above & Beyond - Opening Theme" },
   { id: "BQig2gkFfQU", title: "Sail the Seven Seans" },
-  { id: "rPocVxqp6j0", title: "Suoper Eights Assemble" },
+  { id: "rPocVxqp6j0", title: "Super Eights Assemble" },
+  { id: "J7UyW0iW5hk", title: "Hello Hello" },
+  { id: "dXoxuEkoZTs", title: "10 Little Bicycles" },
+  { id: "B-LDOdNGGFI", title: "Show Me Show Me Theme Song" },
+  { id: "VsgpUHUYuJI", title: "Move!" },
+  { id: "RuER69Upyhs", title: "Spidey and his Amazing Friends Theme Song" },
+  { id: "6916kVhbEZw", title: "Skidamarink A Dink A Dink" },
+  { id: "BBcP51ILXCY", title: "Love Monster Theme Song" },
+  { id: "qMGqiyYasiE", title: "Poatman Pat SDS Theme Song" },
+  { id: "J2zFM34WyWU", title: "Bitz & Bob Theme Song" },
+  { id: "wVwx1-g0EB8", title: "Raa Raa Theme Song" },
 ];
 
 const router = useRouter();
@@ -90,7 +100,7 @@ const getThumbnail = (videoId: string) => {
 
 ion-row {
   display: flex;
-  gap: 20px;
+  gap: 40px;
   justify-content: center;
 }
 
