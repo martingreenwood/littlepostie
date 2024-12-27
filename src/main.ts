@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { IonicVue } from "@ionic/vue";
+import { ScreenOrientation } from "@capacitor/screen-orientation";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
@@ -36,6 +37,10 @@ import "./theme/variables.css";
 const app = createApp(App);
 app.use(IonicVue);
 app.use(router);
+
+ScreenOrientation.lock({ orientation: "landscape" }).catch((err) => {
+    console.error("Failed to lock screen orientation:", err);
+});
 
 router.isReady().then(() => {
     app.mount("#app");

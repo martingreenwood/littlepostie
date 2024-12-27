@@ -1,9 +1,13 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'littlepostie',
-  webDir: 'dist'
+    appId: "com.littlepostie.app",
+    appName: "littlepostie",
+    webDir: "dist",
+    android: {
+        allowMixedContent: true,
+        webContentsDebuggingEnabled: true,
+    },
 };
 
 export default config;
