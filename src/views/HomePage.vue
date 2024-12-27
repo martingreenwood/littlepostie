@@ -16,12 +16,14 @@
                     src="../assets/austin-logo-2@4x.png"
                     alt="Austin"
                     class="welcome-image"
+                    @click="goToLibrary"
                 />
                 <ion-button
                     expand="full"
                     shape="round"
                     color="primary"
                     size="large"
+                    class="library-button"
                     @click="goToLibrary"
                 >
                     Let's Go!
@@ -68,6 +70,14 @@ const goToLibrary = () => {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.library-button {
+  margin-top: 16px;
+  z-index: 50;
+  position: relative;
 }
 
 .rotating-background {
