@@ -18,20 +18,23 @@
                     class="welcome-image"
                     @click="goToLibrary"
                 />
-                <ion-button
-                    expand="full"
-                    shape="round"
-                    color="primary"
-                    size="large"
-                    class="library-button"
-                    @click="goToLibrary"
-                >
-                    Let's Go!
-                    <ion-icon
-                        slot="end"
-                        :icon="playCircle"
-                    ></ion-icon>
-                </ion-button>
+                <div class="library-button">
+                    <ion-buttons slot="start">
+                        <ion-button @click="goToLibrary">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="white"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </ion-button>
+                    </ion-buttons>
+                </div>
             </div>
         </ion-content>
     </ion-page>
@@ -78,6 +81,21 @@ const goToLibrary = () => {
   margin-top: 16px;
   z-index: 50;
   position: relative;
+  background-color: chocolate;
+  color: white;
+  border-radius: 50px;
+  width: 56px;
+  height: 56px;
+  font-size: 50px;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.library-button svg {
+  width: 44px;
+  height: 44px;
 }
 
 .rotating-background {
@@ -86,7 +104,7 @@ const goToLibrary = () => {
   left: -50%;
   width: calc(100vw * 2);
   height: calc(100vh * 2);
-  transform: translate(-50vw, -50vw); /* Center the grid */
+  transform: translate(-50vw, -50vw);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);

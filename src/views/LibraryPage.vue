@@ -1,26 +1,22 @@
 <template>
     <ion-page class="ion-page">
-        <ion-grid class="ion-grid">
-            <ion-row>
-                <ion-col
-                    size="12"
-                    size-sm="3"
-                    class="video-card"
-                    v-for="video in videos"
-                    :key="video.id"
-                    @click="selectVideo(video.id)"
-                >
-                    <div class="thumbnail-container">
-                        <img
-                            :src="getThumbnail(video.id)"
-                            :alt="video.title"
-                            class="video-thumbnail"
-                        />
-                    </div>
-                    <p>{{ video.title }}</p>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <div class="ion-grid">
+            <div
+                class="video-card"
+                v-for="video in videos"
+                :key="video.id"
+                @click="selectVideo(video.id)"
+            >
+                <div class="thumbnail-container">
+                    <img
+                        :src="getThumbnail(video.id)"
+                        :alt="video.title"
+                        class="video-thumbnail"
+                    />
+                </div>
+                <p>{{ video.title }}</p>
+            </div>
+        </div>
     </ion-page>
 </template>
 
@@ -82,6 +78,9 @@ const getThumbnail = (videoId: string) => {
   height: 100%;
   backdrop-filter: blur(5px);
   overflow: scroll;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .video-card {
@@ -91,20 +90,20 @@ const getThumbnail = (videoId: string) => {
   cursor: pointer;
   text-align: center;
   color: black;
+  grid-column: span 4;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .thumbnail-container {
+    width: 100%;
     overflow: hidden;
     border-radius: 10px;
 }
 
-ion-row {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-}
-
-ion-item {
-  text-align: center;
+.thumbnail-container img {
+    width: 100%;
+    border-radius: 10px;
 }
 </style>

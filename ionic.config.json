@@ -1,7 +1,8 @@
 {
-  "name": "littlepostie",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
+    "name": "littlepostie",
+    "integrations": {
+        "capacitor": {},
+        "cordova": {}
+    },
+    "type": "vue-vite"
 }

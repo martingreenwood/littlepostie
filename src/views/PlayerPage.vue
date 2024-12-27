@@ -3,23 +3,33 @@
         <div class="back-button">
             <ion-buttons slot="start">
                 <ion-button @click="goBack">
-                    <ion-icon
-                        color="light"
-                        shape="round"
-                        slot="icon-only"
-                        :icon="arrowBackOutline"
-                    ></ion-icon>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="white"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M9.53 2.47a.75.75 0 0 1 0 1.06L4.81 8.25H15a6.75 6.75 0 0 1 0 13.5h-3a.75.75 0 0 1 0-1.5h3a5.25 5.25 0 1 0 0-10.5H4.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0Z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
                 </ion-button>
             </ion-buttons>
         </div>
         <div class="restart-button">
             <ion-buttons @click="restartVideo">
-                <ion-icon
-                    color="light"
-                    shape="round"
-                    slot="icon-only"
-                    :icon="refreshOutline"
-                ></ion-icon>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
             </ion-buttons>
         </div>
         <ion-content>
@@ -82,6 +92,9 @@ const goBack = () => {
 
 <style scoped>
 
+.overscroll {
+  pointer-events: none;}
+
 .back-button {
   position: absolute;
   top: 20px;
@@ -110,6 +123,12 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.back-button svg,
+.restart-button svg {
+  width: 44px;
+  height: 44px;
 }
 
 .video-container {
