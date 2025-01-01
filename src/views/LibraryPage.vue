@@ -1,85 +1,117 @@
 <template>
     <ion-page class="ion-page">
-        <div class="ion-grid">
+        <div v-if="isLoading">Loading videos...</div>
+        <div v-else-if="hasError">Failed to load videos. Please try again later.</div>
+        <div
+            v-else
+            class="ion-grid"
+        >
             <div
                 class="video-card"
                 v-for="video in videos"
                 :key="video.id"
                 @click="selectVideo(video.id)"
+                :aria-label="`Play ${video.title}`"
+                role="button"
             >
                 <div class="thumbnail-container">
                     <img
-                        :src="getThumbnail(video.id)"
+                        :src="video.video_thumbnail.permalink"
                         :alt="video.title"
                         class="video-thumbnail"
                     />
                 </div>
                 <p>{{ video.title }}</p>
+                <button class="play-button">
+                    <span>Play Video</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-6"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+                        />
+                    </svg>
+                </button>
             </div>
         </div>
     </ion-page>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
+import axios from "axios";
 import { useRouter } from "vue-router";
 
-// Example video list
-const videos = [
-  { id: "YcRNHrKTSeQ", title: "Can I Vroom in The Vroomster" },
-  { id: "K4zsa0alYMM", title: "Mojo Swap Tops Intro" },
-  { id: "pZw9veQ76fo", title: "5 Little Ducks" },
-  { id: "TjmGTbNLj6Q", title: "10 Little Dinosaurs" },
-  { id: "lm74Gv3tA78", title: "10 Little Aeroplanes" },
-  { id: "oLnd4G7dsHg", title: "Wheels on the Bus" },
-  { id: "rHtq5GIIUV8", title: "5 Little Ghosts" },
-  { id: "BpEAhgoitfE", title: "ABC Boo" },
-  { id: "OekqqZj5kWw", title: "Chuggington Theme Song" },
-  { id: "4BzCW7pt37s", title: "Yaka Dee Theme Song" },
-  { id: "REBUEe3mtXo", title: "Go Jetters Theme Song" },
-  { id: "1UdI_eoDPKQ", title: "Paw Patrol Theme Song" },
-  { id: "vC0u5Bi6hos", title: "Creature Report Theme Song" },
-  { id: "kCeBJWEyVFM", title: "Octonauts: Above & Beyond - Opening Theme" },
-  { id: "BQig2gkFfQU", title: "Sail the Seven Seans" },
-  { id: "rPocVxqp6j0", title: "Super Eights Assemble" },
-  { id: "J7UyW0iW5hk", title: "Hello Hello" },
-  { id: "dXoxuEkoZTs", title: "10 Little Bicycles" },
-  { id: "B-LDOdNGGFI", title: "Show Me Show Me Theme Song" },
-  { id: "VsgpUHUYuJI", title: "Move!" },
-  { id: "RuER69Upyhs", title: "Spidey and his Amazing Friends Theme Song" },
-  { id: "6916kVhbEZw", title: "Skidamarink A Dink A Dink" },
-  { id: "BBcP51ILXCY", title: "Love Monster Theme Song" },
-  { id: "qMGqiyYasiE", title: "Poatman Pat SDS Theme Song" },
-  { id: "J2zFM34WyWU", title: "Bitz & Bob Theme Song" },
-  { id: "wVwx1-g0EB8", title: "Raa Raa Theme Song" },
-];
+interface Video {
+  id: number;
+  title: string;
+  video_field: string;
+  video_thumbnail: {
+    permalink: string;
+  };
+}
+
+const isLoading = ref(true);
+const hasError = ref(false);
+const videos = ref<Video[]>([]);
 
 const router = useRouter();
+const apiUrl = "https://martingreenwood.test/api/collections/videos/entries";
 
-const selectVideo = (videoId: string) => {
-  router.push({ name: "Player", params: { videoId } });
+const fetchVideos = async () => {
+  isLoading.value = true;
+  hasError.value = false;
+  try {
+    const response = await axios.get(apiUrl);
+    videos.value = response.data.data;
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    hasError.value = true;
+  } finally {
+    isLoading.value = false;
+  }
 };
 
-const getThumbnail = (videoId: string) => {
-  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+const selectVideo = (videoId: any) => {
+  const selectedVideo = videos.value.find((v) => v.id === videoId);
+  console.log('selectedVideo', selectedVideo);
+
+  if (selectedVideo) {
+    router.push({
+      name: "Player",
+      params: { videoId: selectedVideo.id },
+    });
+  }
 };
+
+onMounted(() => {
+  fetchVideos();
+});
 </script>
 
 <style scoped>
 .ion-page {
-  background-image: url("../assets/wp10739516-cbeebies-wallpapers.jpg");
+  background-image: url("../assets/garden-wallpaper.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
 .ion-grid {
-  padding: 20px;
+  padding: 30px;
   width: 100%;
   height: 100%;
   backdrop-filter: blur(5px);
   overflow: scroll;
   display: grid;
-  gap: 20px;
+  gap: 30px;
   grid-template-columns: repeat(12, 1fr);
 }
 
@@ -96,6 +128,18 @@ const getThumbnail = (videoId: string) => {
   font-size: 14px;
 }
 
+@media (max-width: 1023px) {
+    .video-card {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-card {
+        grid-column: span 12;
+    }
+}
+
 .thumbnail-container {
     width: 100%;
     overflow: hidden;
@@ -105,5 +149,28 @@ const getThumbnail = (videoId: string) => {
 .thumbnail-container img {
     width: 100%;
     border-radius: 10px;
+}
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background-color: tomato;
+  border-radius: 50px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+.play-button span {
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.play-button svg {
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
 }
 </style>

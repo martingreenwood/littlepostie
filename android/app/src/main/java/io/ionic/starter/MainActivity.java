@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.littlepostie.app;
 
 import com.getcapacitor.BridgeActivity;
 

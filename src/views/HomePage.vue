@@ -23,15 +23,19 @@
                         <ion-button @click="goToLibrary">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
                                 viewBox="0 0 24 24"
-                                fill="white"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="size-6"
                             >
                                 <path
-                                    fill-rule="evenodd"
-                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
-                                    clip-rule="evenodd"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
                                 />
                             </svg>
+                            <span>Library</span>
                         </ion-button>
                     </ion-buttons>
                 </div>
@@ -42,7 +46,6 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { playCircle } from 'ionicons/icons';
 
 const router = useRouter();
 
@@ -78,15 +81,12 @@ const goToLibrary = () => {
 }
 
 .library-button {
-  margin-top: 16px;
   z-index: 50;
   position: relative;
-  background-color: chocolate;
+  background-color: tomato;
   color: white;
   border-radius: 50px;
-  width: 56px;
-  height: 56px;
-  font-size: 50px;
+  padding: 10px 20px;
   z-index: 999;
   display: flex;
   justify-content: center;
@@ -94,8 +94,15 @@ const goToLibrary = () => {
 }
 
 .library-button svg {
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
+
+.library-button span {
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .rotating-background {
@@ -117,7 +124,6 @@ const goToLibrary = () => {
   width: 100%;
   height: 100%;
 }
-
 
 .welcome-container {
   display: flex;

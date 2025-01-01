@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">littlepostie</string>
     <string name="title_activity_main">littlepostie</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.littlepostie.app</string>
+    <string name="custom_url_scheme">com.littlepostie.app</string>
 </resources>
